@@ -114,7 +114,11 @@ const HomeScreen = () => {
           Your Financial Companion
         </Text>
         <Text variant="bodyLarge" style={styles.headerSubtitle}>
-          Upload your bank statement to unlock personalized insights
+          Let's analyze your finances
+        </Text>
+        <Text variant="bodyMedium" style={styles.headerDescription}>
+          Upload your bank statement to get personalized insights about your spending, 
+          savings opportunities, investment potential, and debt management strategies.
         </Text>
         <Button
           mode="contained"
@@ -122,6 +126,7 @@ const HomeScreen = () => {
           icon="file-upload"
           style={styles.uploadButton}
           contentStyle={styles.buttonContent}
+          labelStyle={styles.uploadButtonLabel}
         >
           {bankStatement ? 'Change Statement' : 'Upload Statement'}
         </Button>
@@ -192,9 +197,11 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 24,
-    paddingTop: 40,
+    paddingTop: 48,
+    paddingBottom: 32,
     borderBottomLeftRadius: 32,
     borderBottomRightRadius: 32,
+    marginBottom: 24,
   },
   headerTitle: {
     color: '#fff',
@@ -208,9 +215,22 @@ const styles = StyleSheet.create({
     opacity: 0.9,
     marginBottom: 24,
   },
+  headerDescription: {
+    color: '#fff',
+    textAlign: 'center',
+    opacity: 0.9,
+    marginBottom: 24,
+    paddingHorizontal: 16,
+  },
   uploadButton: {
     backgroundColor: '#fff',
     marginBottom: 16,
+    elevation: 4,
+  },
+  uploadButtonLabel: {
+    color: theme.colors.primary,
+    fontSize: 16,
+    fontWeight: '600',
   },
   buttonContent: {
     height: 48,
