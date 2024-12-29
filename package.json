@@ -22,7 +22,8 @@
     "expo-document-picker": "~11.10.1",
     "expo-file-system": "~16.0.8",
     "react-native-pdf": "^6.7.4",
-    "@react-native-community/netinfo": "11.1.0"
+    "@react-native-community/netinfo": "11.1.0",
+    "expo-linear-gradient": "~12.7.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

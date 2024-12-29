@@ -15,33 +15,66 @@ export const analyzeBankStatement = async (statementFile, feature) => {
     });
 
     const prompts = {
-      spending: `Analyze this bank statement and provide insights about spending patterns:
-        1. Top spending categories
-        2. Unusual expenses
-        3. Recurring payments
-        4. Areas for potential savings
-        Format as concise bullet points.`,
+      budgeting: `Analyze this bank statement and provide a comprehensive budgeting plan:
+        1. Apply the 50/30/20 Rule:
+           - Calculate exact amounts for needs (50%)
+           - Calculate exact amounts for wants (30%)
+           - Calculate exact amounts for savings/debt (20%)
+        2. Create a Zero-Based Budget:
+           - List all income sources
+           - Categorize all expenses
+           - Show how every dollar should be allocated
+        3. Suggest envelope system categories based on spending patterns
+        
+        Format the response with clear sections and specific dollar amounts.`,
       
-      savings: `Based on this bank statement, provide actionable savings recommendations:
-        1. Potential monthly savings amount
-        2. Suggested automated saving rules
-        3. Specific expenses to reduce
-        4. Emergency fund recommendations
-        Format as clear action items.`,
+      savings: `Analyze this bank statement and create a detailed savings plan:
+        1. Pay Yourself First Strategy:
+           - Recommend optimal automatic savings amount
+           - Suggest timing based on income patterns
+        2. Emergency Fund Planning:
+           - Calculate recommended fund size
+           - Suggest monthly contribution amount
+        3. Savings Challenges:
+           - Customize a 52-week savings plan
+           - Identify potential no-spend categories
+        4. High-Yield Savings Opportunities:
+           - Calculate potential interest earnings
+           - Recommend allocation between accounts
+        
+        Provide specific numbers and actionable steps.`,
       
-      investment: `Analyze this bank statement for investment opportunities:
-        1. Available amount for investing
-        2. Suggested investment vehicles
-        3. Risk-appropriate allocations
-        4. Timeline recommendations
-        Provide practical, actionable advice.`,
+      investing: `Create an investment plan based on this bank statement:
+        1. Dollar-Cost Averaging Strategy:
+           - Calculate recommended monthly investment amount
+           - Suggest optimal investment timing
+        2. Investment Vehicle Recommendations:
+           - Analyze retirement account potential
+           - Suggest robo-advisor allocations
+        3. Risk Assessment:
+           - Evaluate investment capacity
+           - Recommend portfolio allocation
+        4. Timeline Planning:
+           - Short-term investment opportunities
+           - Long-term investment strategy
+        
+        Include specific amounts and practical implementation steps.`,
       
-      budget: `Create a smart budget based on this bank statement:
-        1. Income breakdown
-        2. Essential expenses
-        3. Discretionary spending
-        4. Recommended allocations
-        Format as percentages and specific amounts.`
+      debt: `Analyze this bank statement for debt management:
+        1. Debt Snowball Analysis:
+           - List debts from smallest to largest
+           - Calculate accelerated payment plan
+        2. Debt Avalanche Strategy:
+           - Order debts by interest rate
+           - Calculate potential interest savings
+        3. Consolidation Opportunities:
+           - Evaluate consolidation potential
+           - Calculate monthly payment impact
+        4. Debt-Free Timeline:
+           - Project debt-free date
+           - Suggest payment optimization
+        
+        Provide specific numbers and monthly action plans.`
     };
 
     const response = await fetch(

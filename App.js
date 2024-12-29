@@ -5,31 +5,41 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { theme } from './src/theme';
 import HomeScreen from './src/screens/HomeScreen';
 import ApiKeysScreen from './src/screens/ApiKeysScreen';
+import { StatusBar } from 'expo-status-bar';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <PaperProvider theme={theme}>
+      <StatusBar style="light" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: theme.colors.primary,
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: '700',
+            },
+            headerShadowVisible: false,
+          }}
+        >
           <Stack.Screen 
             name="ApiKeys" 
             component={ApiKeysScreen}
-            options={{ title: 'API Setup' }}
+            options={{ 
+              title: 'Welcome to Finneas',
+              headerLargeTitle: true,
+            }}
           />
           <Stack.Screen 
             name="Home" 
             component={HomeScreen}
             options={{ 
-              title: 'Financial Insights',
-              headerStyle: {
-                backgroundColor: theme.colors.primary,
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: '600',
-              },
+              title: 'Finneas',
+              headerLargeTitle: true,
             }}
           />
         </Stack.Navigator>
