@@ -110,31 +110,33 @@ const HomeScreen = () => {
         colors={themeStyles.gradientBackground}
         style={styles.header}
       >
-        <Text variant="headlineMedium" style={styles.headerTitle}>
-          Your Financial Companion
-        </Text>
-        <Text variant="bodyLarge" style={styles.headerSubtitle}>
-          Let's analyze your finances
-        </Text>
-        <Text variant="bodyMedium" style={styles.headerDescription}>
-          Upload your bank statement to get personalized insights about your spending, 
-          savings opportunities, investment potential, and debt management strategies.
-        </Text>
-        <Button
-          mode="contained"
-          onPress={pickDocument}
-          icon="file-upload"
-          style={styles.uploadButton}
-          contentStyle={styles.buttonContent}
-          labelStyle={styles.uploadButtonLabel}
-        >
-          {bankStatement ? 'Change Statement' : 'Upload Statement'}
-        </Button>
-        {bankStatement && (
-          <Text variant="bodyMedium" style={styles.fileName}>
-            Analyzing: {bankStatement.name}
+        <View style={styles.headerContent}>
+          <Text variant="headlineMedium" style={styles.headerTitle}>
+            Your Financial Companion
           </Text>
-        )}
+          <Text variant="bodyLarge" style={styles.headerSubtitle}>
+            Let's analyze your finances
+          </Text>
+          <Text variant="bodyMedium" style={styles.headerDescription}>
+            Upload your bank statement to get personalized insights about your spending, 
+            savings opportunities, investment potential, and debt management strategies.
+          </Text>
+          <Button
+            mode="contained"
+            onPress={pickDocument}
+            icon="file-upload"
+            style={styles.uploadButton}
+            contentStyle={styles.buttonContent}
+            labelStyle={styles.uploadButtonLabel}
+          >
+            {bankStatement ? 'Change Statement' : 'Upload Statement'}
+          </Button>
+          {bankStatement && (
+            <Text variant="bodyMedium" style={styles.fileName}>
+              Analyzing: {bankStatement.name}
+            </Text>
+          )}
+        </View>
       </LinearGradient>
 
       {error && (
@@ -196,12 +198,14 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
   header: {
-    padding: 24,
-    paddingTop: 48,
-    paddingBottom: 32,
     borderBottomLeftRadius: 32,
     borderBottomRightRadius: 32,
     marginBottom: 24,
+  },
+  headerContent: {
+    paddingHorizontal: 24,
+    paddingTop: 100,
+    paddingBottom: 32,
   },
   headerTitle: {
     color: '#fff',
@@ -213,7 +217,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     opacity: 0.9,
-    marginBottom: 24,
+    marginBottom: 16,
   },
   headerDescription: {
     color: '#fff',
@@ -221,11 +225,13 @@ const styles = StyleSheet.create({
     opacity: 0.9,
     marginBottom: 24,
     paddingHorizontal: 16,
+    lineHeight: 22,
   },
   uploadButton: {
     backgroundColor: '#fff',
     marginBottom: 16,
     elevation: 4,
+    borderRadius: 12,
   },
   uploadButtonLabel: {
     color: theme.colors.primary,

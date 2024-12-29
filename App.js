@@ -24,6 +24,8 @@ export default function App() {
               fontWeight: '700',
             },
             headerShadowVisible: false,
+            headerTransparent: true,
+            headerBlurEffect: 'dark',
           }}
         >
           <Stack.Screen 
@@ -32,6 +34,7 @@ export default function App() {
             options={{ 
               title: 'Welcome to Finneas',
               headerLargeTitle: true,
+              headerTransparent: false,
             }}
           />
           <Stack.Screen 
@@ -39,7 +42,7 @@ export default function App() {
             component={HomeScreen}
             options={{ 
               title: 'Finneas',
-              headerLargeTitle: true,
+              headerLargeTitle: false,
             }}
           />
         </Stack.Navigator>
