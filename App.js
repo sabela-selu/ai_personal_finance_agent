@@ -5,7 +5,6 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { theme } from './src/theme';
 import HomeScreen from './src/screens/HomeScreen';
 import ApiKeysScreen from './src/screens/ApiKeysScreen';
-import PayslipAnalysisScreen from './src/screens/PayslipAnalysisScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,12 +21,16 @@ export default function App() {
           <Stack.Screen 
             name="Home" 
             component={HomeScreen}
-            options={{ title: 'AI Finance Planner' }}
-          />
-          <Stack.Screen 
-            name="PayslipAnalysis" 
-            component={PayslipAnalysisScreen}
-            options={{ title: 'Payslip Analysis' }}
+            options={{ 
+              title: 'Financial Insights',
+              headerStyle: {
+                backgroundColor: theme.colors.primary,
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: '600',
+              },
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
