@@ -3,46 +3,65 @@ import { ScrollView, StyleSheet, View, Dimensions } from 'react-native';
 import { Button, Card, Text, Surface, ActivityIndicator, Portal, Modal, IconButton } from 'react-native-paper';
 import * as DocumentPicker from 'expo-document-picker';
 import { analyzeBankStatement } from '../services/geminiService';
+import { LinearGradient } from 'expo-linear-gradient';
+import { theme, styles as themeStyles } from '../theme';
 
 const { width } = Dimensions.get('window');
 
-const FeatureCard = ({ title, description, icon, onPress, loading, result }) => (
-  <Card style={styles.card} mode="elevated">
-    <Card.Title
-      title={title}
-      left={(props) => <IconButton {...props} icon={icon} />}
-    />
-    <Card.Content>
+const FeatureCard = ({ title, description, icon, onPress, loading, result, methods, color }) => (
+  <Card style={[styles.card, themeStyles.cardShadow]} mode="elevated">
+    <LinearGradient
+      colors={[color, color + '99']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.cardGradient}
+    >
+      <IconButton icon={icon} size={32} iconColor="#fff" />
+      <Text variant="titleLarge" style={styles.cardTitle}>{title}</Text>
+    </LinearGradient>
+    <Card.Content style={styles.cardContent}>
       <Text variant="bodyMedium">{description}</Text>
+      {methods && (
+        <View style={styles.methodsContainer}>
+          {methods.map((method, index) => (
+            <Surface key={index} style={[styles.methodChip, { backgroundColor: color + '15' }]}>
+              <Text variant="bodySmall" style={{ color: color }}>{method}</Text>
+            </Surface>
+          ))}
+        </View>
+      )}
       {result && (
         <Surface style={styles.resultContainer}>
           <Text variant="bodyMedium">{result}</Text>
         </Surface>
       )}
+      <Button
+        mode="contained"
+        onPress={onPress}
+        loading={loading}
+        disabled={loading}
+        style={styles.analyzeButton}
+        contentStyle={styles.buttonContent}
+      >
+        {loading ? 'Analyzing...' : 'Analyze'}
+      </Button>
     </Card.Content>
-    <Card.Actions>
-      {loading ? (
-        <ActivityIndicator size="small" />
-      ) : (
-        <Button onPress={onPress}>Analyze</Button>
-      )}
-    </Card.Actions>
   </Card>
 );
 
 const HomeScreen = () => {
   const [bankStatement, setBankStatement] = useState(null);
   const [loading, setLoading] = useState({
-    spending: false,
+    budgeting: false,
     savings: false,
-    investment: false,
-    budget: false
+    investing: false,
+    debt: false
   });
   const [results, setResults] = useState({
-    spending: null,
+    budgeting: null,
     savings: null,
-    investment: null,
-    budget: null
+    investing: null,
+    debt: null
   });
   const [error, setError] = useState(null);
 
@@ -56,10 +75,10 @@ const HomeScreen = () => {
       if (!result.canceled) {
         setBankStatement(result.assets[0]);
         setResults({
-          spending: null,
+          budgeting: null,
           savings: null,
-          investment: null,
-          budget: null
+          investing: null,
+          debt: null
         });
       }
     } catch (err) {
@@ -87,27 +106,31 @@ const HomeScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Surface style={styles.header}>
-        <Text variant="headlineSmall" style={styles.headerTitle}>
-          AI-Powered Financial Analysis
+      <LinearGradient
+        colors={themeStyles.gradientBackground}
+        style={styles.header}
+      >
+        <Text variant="headlineMedium" style={styles.headerTitle}>
+          Your Financial Companion
         </Text>
-        <Text variant="bodyMedium" style={styles.headerSubtitle}>
-          Upload your bank statement to get personalized financial insights
+        <Text variant="bodyLarge" style={styles.headerSubtitle}>
+          Upload your bank statement to unlock personalized insights
         </Text>
         <Button
           mode="contained"
           onPress={pickDocument}
           icon="file-upload"
           style={styles.uploadButton}
+          contentStyle={styles.buttonContent}
         >
           {bankStatement ? 'Change Statement' : 'Upload Statement'}
         </Button>
         {bankStatement && (
-          <Text variant="bodySmall" style={styles.fileName}>
+          <Text variant="bodyMedium" style={styles.fileName}>
             Analyzing: {bankStatement.name}
           </Text>
         )}
-      </Surface>
+      </LinearGradient>
 
       {error && (
         <Text style={styles.error}>{error}</Text>
@@ -115,39 +138,47 @@ const HomeScreen = () => {
 
       <View style={styles.cardsContainer}>
         <FeatureCard
-          title="Spending Patterns"
-          description="Analyze your spending habits and identify areas for optimization"
-          icon="chart-line"
-          onPress={() => analyzeFeature('spending')}
-          loading={loading.spending}
-          result={results.spending}
+          title="Smart Budgeting"
+          description="Get personalized budgeting recommendations based on your spending patterns"
+          icon="calculator-variant"
+          methods={['50/30/20 Rule', 'Zero-Based Budget', 'Envelope System']}
+          onPress={() => analyzeFeature('budgeting')}
+          loading={loading.budgeting}
+          result={results.budgeting}
+          color={theme.colors.primary}
         />
 
         <FeatureCard
-          title="Savings Opportunities"
-          description="Discover potential savings and automated saving strategies"
+          title="Savings Strategy"
+          description="Discover optimal saving methods and opportunities"
           icon="piggy-bank"
+          methods={['Pay Yourself First', 'High-Yield Savings', 'Savings Challenges']}
           onPress={() => analyzeFeature('savings')}
           loading={loading.savings}
           result={results.savings}
+          color={theme.colors.secondary}
         />
 
         <FeatureCard
-          title="Investment Insights"
-          description="Get personalized investment recommendations based on your cash flow"
+          title="Investment Planning"
+          description="Get personalized investment recommendations"
           icon="trending-up"
-          onPress={() => analyzeFeature('investment')}
-          loading={loading.investment}
-          result={results.investment}
+          methods={['Dollar-Cost Averaging', 'Robo-Advisors', 'Retirement Planning']}
+          onPress={() => analyzeFeature('investing')}
+          loading={loading.investing}
+          result={results.investing}
+          color={theme.colors.tertiary}
         />
 
         <FeatureCard
-          title="Smart Budget"
-          description="Generate an AI-powered budget based on your spending history"
-          icon="calculator"
-          onPress={() => analyzeFeature('budget')}
-          loading={loading.budget}
-          result={results.budget}
+          title="Debt Management"
+          description="Optimize your debt repayment strategy"
+          icon="credit-card-check"
+          methods={['Debt Snowball', 'Debt Avalanche', 'Debt Consolidation']}
+          onPress={() => analyzeFeature('debt')}
+          loading={loading.debt}
+          result={results.debt}
+          color={theme.colors.success}
         />
       </View>
     </ScrollView>
@@ -157,47 +188,84 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: theme.colors.background,
   },
   header: {
     padding: 24,
-    backgroundColor: '#fff',
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
-    elevation: 4,
+    paddingTop: 40,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
   },
   headerTitle: {
+    color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold',
     marginBottom: 8,
   },
   headerSubtitle: {
+    color: '#fff',
     textAlign: 'center',
-    color: '#666',
-    marginBottom: 16,
+    opacity: 0.9,
+    marginBottom: 24,
   },
   uploadButton: {
-    marginBottom: 8,
+    backgroundColor: '#fff',
+    marginBottom: 16,
+  },
+  buttonContent: {
+    height: 48,
   },
   fileName: {
+    color: '#fff',
     textAlign: 'center',
-    color: '#666',
+    opacity: 0.9,
   },
   cardsContainer: {
     padding: 16,
+    paddingTop: 24,
   },
   card: {
+    marginBottom: 24,
+    borderRadius: 24,
+    overflow: 'hidden',
+  },
+  cardGradient: {
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  cardTitle: {
+    color: '#fff',
+    marginLeft: 12,
+    fontWeight: '600',
+  },
+  cardContent: {
+    padding: 20,
+  },
+  methodsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 12,
     marginBottom: 16,
-    elevation: 2,
+  },
+  methodChip: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    marginRight: 8,
+    marginBottom: 8,
   },
   resultContainer: {
-    marginTop: 12,
-    padding: 12,
-    backgroundColor: '#f8f8f8',
-    borderRadius: 8,
+    padding: 16,
+    backgroundColor: theme.colors.surfaceVariant,
+    borderRadius: 16,
+    marginBottom: 16,
+  },
+  analyzeButton: {
+    borderRadius: 12,
   },
   error: {
-    color: '#B00020',
+    color: theme.colors.error,
     textAlign: 'center',
     marginTop: 16,
     marginHorizontal: 16,
