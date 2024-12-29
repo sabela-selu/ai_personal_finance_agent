@@ -1,14 +1,44 @@
-## 💰 AI Personal Finance Planner
-This Streamlit app is an AI-powered personal finance planner that generates personalized financial plans using OpenAI GPT-4o. It automates the process of researching, planning, and creating tailored budgets, investment strategies, and savings goals, empowering you to take control of your financial future with ease.
+# Finneas - AI-Powered Financial Analysis
 
-### Features
-- Set your financial goals and provide details about your current financial situation
-- Use GPT-4o to generate intelligent and personalized financial advice
-- Receive customized budgets, investment plans, and savings strategies
+Finneas is a modern, intelligent financial analysis application that helps users understand and optimize their financial health using bank statement data and AI-powered insights.
 
-### How to get Started?
+## Features
 
-1. Clone the GitHub repository
+### 1. Smart Budgeting
+- Implements the 50/30/20 Rule
+- Zero-Based Budgeting analysis
+- Envelope System recommendations
+- Personalized spending categorization
+
+### 2. Savings Strategy
+- Pay Yourself First optimization
+- High-Yield Savings recommendations
+- Custom savings challenges
+- Emergency fund planning
+
+### 3. Investment Planning
+- Dollar-Cost Averaging strategies
+- Robo-advisor recommendations
+- Risk assessment
+- Retirement planning insights
+
+### 4. Debt Management
+- Debt Snowball analysis
+- Debt Avalanche optimization
+- Consolidation opportunities
+- Debt-free timeline projections
+
+## Technology Stack
+
+- React Native with Expo
+- Google Gemini 1.5 Pro API
+- React Native Paper (UI Components)
+- Expo Linear Gradient
+- AsyncStorage for data persistence
+
+## Setup Instructions
+
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/Shubhamsaboo/awesome-llm-apps.git
