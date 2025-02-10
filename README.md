@@ -43,20 +43,37 @@ Finneas is a modern, intelligent financial analysis application that helps users
 ```bash
 git clone https://github.com/sabela-selu/ai_personal_finance.git
 ```
-2. Install the required dependencies:
+
+2. Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+cd ai_personal_finance
+npm install
+# or
+yarn install
 ```
-3. Get your OpenAI API Key
 
-- Sign up for an [OpenAI account](https://platform.openai.com/) (or the LLM provider of your choice) and obtain your API key.
+3. Get your Google Gemini API Key:
+- Visit the [Google AI Studio](https://makersuite.google.com/app/apikey) to get your API key
+- Create a `.env` file in the project root and add your API key:
+  ```
+  GOOGLE_GEMINI_API_KEY=your_api_key_here
+  ```
 
-4. Get your SerpAPI Key
+4. Start the development server:
 
-- Sign up for an [SerpAPI account](https://serpapi.com/) and obtain your API key.
-
-5. Run the Streamlit App
 ```bash
-streamlit run finance_agent.py
+npx expo start
 ```
+
+5. Run on your device:
+- Install the Expo Go app on your iOS or Android device
+- Scan the QR code shown in the terminal with your device's camera
+- The app will open in Expo Go
+
+## Development
+
+- To run on iOS simulator: Press `i` in the terminal
+- To run on Android emulator: Press `a` in the terminal
+- To reload the app: Press `r` in the terminal
+- To open developer menu: Press `m` in the terminal
