@@ -1,4 +1,4 @@
-# Finneas - AI-Powered Financial Analysis
+# Finneas - AI-Powered Financial Analysis Mobile App
 
 Finneas is a modern, intelligent financial analysis application that helps users understand and optimize their financial health using bank statement data and AI-powered insights.
 
