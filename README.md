@@ -42,7 +42,6 @@ Finneas is a modern, intelligent financial analysis application that helps users
 
 ```bash
 git clone https://github.com/sabela-selu/ai_personal_finance.git
-cd awesome-llm-apps/ai_agent_tutorials/ai_personal_finance_agent
 ```
 2. Install the required dependencies:
 
